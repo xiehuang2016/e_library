@@ -1,0 +1,29 @@
+spring:
+  cache:
+    type: caffeine
+    cache-names:
+      - book-content
+      - book-search
+    caffeine:
+      spec: maximumSize=1000,weakValues,expireAfterAccess=10m
+  datasource:
+    url: jdbc:h2:mem:elibrary;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+    validate-on-migrate: true
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5level [%thread] [requestId=%X{requestId:-}] [userId=%X{userId:-}] %logger{36} - %msg%n"
+library:
+  loan:
+    term-days: 14
+    max-renewals: 3
+  fine:
+    daily-rate: 1.00
